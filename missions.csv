@@ -1,4 +1,7 @@
-client,tjm,jours
-L'oréal,600,20
-carrefour,540,18
-renault,650,21
+client,annee,tjm,jours
+renault,2023,520,200
+carrefour,2024,550,190
+L'Oréal,2025,580,205
+Servier,2022,500,180
+carrefour,2025,560,40
+L'Oréal,2026,600,150
