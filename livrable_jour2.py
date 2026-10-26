@@ -64,3 +64,14 @@ with open("missions.csv", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     for ligne in reader:
         print(ligne["client"], ligne["tjm"])
+
+
+import pandas as pd
+df = pd.read_csv("missions.csv")
+print(df)
+print(df[df["tjm"] >= 550])
+df["ca"] = df["tjm"] * df["jours"]
+print(df.sort_values("ca", ascending=False)) #order by
+print(df["ca"].sum())  #sum
+print(df.groupby("client")["ca"].sum())  #group by  
+df.to_csv("resultat.csv", index=False)  #export to csv
