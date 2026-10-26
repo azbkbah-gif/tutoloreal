@@ -5,3 +5,4 @@ __pycache__/
 .vscode/
 previsions.json
 data/
+ca_categorie.csv
