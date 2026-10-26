@@ -28,3 +28,7 @@ class Consultant:
     def ca_total(self) -> int:
         """Somme du CA de toutes les missions."""
         return sum(m.ca() for m in self.missions)
+
+    def meilleure_mission(self) -> Mission:
+        """Renvoie la mission qui a le plus gros CA."""
+        return max(self.missions, key=lambda m: m.ca())

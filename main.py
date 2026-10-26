@@ -13,3 +13,4 @@ if __name__ == "__main__":
     aziz = Consultant("Aziz Bah", [m1, m2])
     print(aziz)
     print(aziz.ca_total())
+    print(aziz.meilleure_mission())
