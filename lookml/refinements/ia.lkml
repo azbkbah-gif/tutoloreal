@@ -11,11 +11,23 @@ view: +order_items {
   dimension: status {
     description: "Statut de la ligne : Complete, Shipped, Processing, Cancelled, Returned."
   }
+    measure: taux_marge {
+    description: "Marge brute / CA net, en pourcentage. Synonymes : marge, taux de marge, rentabilité."
+  }
 }
 
 view: +products {
   dimension: department {
     hidden: yes
+  }
+  dimension: category {
+    description: "Catégorie de produit : Soins du visage, Maquillage, Parfums, Capillaire, Corps, Homme. Synonymes : famille, univers, rayon, type de produit."
+  }
+}
+
+view: +users {
+  dimension: country {
+    description: "Pays de résidence du client. Synonymes : pays, marché, zone, géographie."
   }
 }
 
@@ -47,6 +59,10 @@ explore: ventes_ia {
     order_items.total_ca,
     order_items.nb_commandes,
     order_items.panier_moyen,
+    order_items.taux_marge,
+    order_items.marge_brute,
+    order_items.marge_ligne,
+    products.cost,
     products.category,
     products.brand,
     users.country,

@@ -83,4 +83,20 @@ view: order_items {
     sql: 1.0 * COUNT(CASE WHEN ${status} = 'Retourned' THEN 1 END) / NULLIF(COUNT(*), 0) ;;
     value_format_name: percent_1
   }
+    measure: ca_mois_precedent {
+    label: "CA net du mois précédent"
+    description: "CA HT hors annulations et retours, sur le mois calendaire précédent"
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [created_date: "last month", status: "-Cancelled,-Returned"]
+    value_format_name: eur
+  }
+
+  measure: taux_marge {
+    label: "Taux de marge"
+    description: "Marge brute divisée par le CA net"
+    type: number
+    sql: ${marge_brute} / NULLIF(${ca_net}, 0) ;;
+    value_format_name: percent_1
+  }
 }

@@ -41,4 +41,9 @@ view: orders {
     sql: ${days_livraison} ;;
     value_format_name: decimal_1
   }
+    dimension: est_livree {
+    label: "Commande livrée"
+    type: yesno
+    sql: ${TABLE}.delivered_at IS NOT NULL ;;
+  }
 }
