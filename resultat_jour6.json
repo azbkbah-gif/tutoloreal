@@ -1,0 +1,32 @@
+[
+  {
+    "products.category": "Parfums",
+    "order_items.ca_net": 153191.95999999996,
+    "order_items.taux_marge": 0.5382540310862267
+  },
+  {
+    "products.category": "Soins du visage",
+    "order_items.ca_net": 145982.81,
+    "order_items.taux_marge": 0.5554984864313818
+  },
+  {
+    "products.category": "Maquillage",
+    "order_items.ca_net": 84307.16000000005,
+    "order_items.taux_marge": 0.5528503154417724
+  },
+  {
+    "products.category": "Homme",
+    "order_items.ca_net": 45315.08000000007,
+    "order_items.taux_marge": 0.5423587468012849
+  },
+  {
+    "products.category": "Capillaire",
+    "order_items.ca_net": 42802.50999999997,
+    "order_items.taux_marge": 0.5402019647913177
+  },
+  {
+    "products.category": "Corps",
+    "order_items.ca_net": 20703.61999999999,
+    "order_items.taux_marge": 0.5326034770730917
+  }
+]
