@@ -138,10 +138,15 @@ def verifier_vues(vues, constantes, r: Rapport) -> dict:
                             r.erreur(f"{ou}.{champ_nom}", f"${{{ref}}} : champ inconnu")
                     elif ref not in catalogue[nom]:
                         r.erreur(f"{ou}.{champ_nom}", f"${{{ref}}} : champ inconnu dans '{nom}'")
-            for filtre in champ.get("filters", []) or []:
-                for cle in (filtre if isinstance(filtre, dict) else {}):
-                    if cle not in ("field", "value") and cle not in catalogue[nom]:
-                        r.erreur(f"{ou}.{champ_nom}", f"filtre sur un champ inconnu '{cle}'")
+            # filtres de mesure : le parseur les range dans filters__all
+            groupes = list(champ.get("filters__all", [])) + [champ.get("filters", []) or []]
+            for groupe in groupes:
+                for filtre in groupe:
+                    for cle in (filtre if isinstance(filtre, dict) else {}):
+                        v_f, _, c_f = cle.rpartition(".")
+                        v_f = v_f or nom
+                        if v_f not in catalogue or c_f not in catalogue[v_f]:
+                            r.erreur(f"{ou}.{champ_nom}", f"filtre sur un champ inconnu '{cle}'")
     return catalogue
 
 

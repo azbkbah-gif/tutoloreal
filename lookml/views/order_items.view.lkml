@@ -42,8 +42,16 @@ view: order_items {
   }
   dimension: marge_ligne {
     type: number
-    sql: ${sale_price} - {products.cost} ;;
+    sql: ${sale_price} - ${products.cost} ;;
     hidden: yes
+  }
+  measure: marge_brute {
+    label: "Marge brute"
+    description: "CA net moins coût de revient des produits vendus"
+    type: sum
+    sql: ${marge_ligne} ;;
+    filters: [status: "-Cancelled,-Returned"]
+    value_format_name: eur
   }
   measure: total_ca {
     label: "Chiffre d'affaires"
@@ -57,7 +65,7 @@ view: order_items {
     description: "CA HT hors commandes annulés et retournées"
     type: sum
     sql: ${sale_price} ;;
-    filters: [status: "-cancelled", status: "-returned"]
+    filters: [status: "-Cancelled", status: "-Returned"]
     value_format_name: euro_2
   }
   measure: nb_commandes {
