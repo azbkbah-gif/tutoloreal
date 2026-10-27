@@ -40,3 +40,12 @@ test: ca_net_positif {
     expression: ${order_items.ca_net} >= 0 ;;
   }
 }
+test: commandes_2025_superieures_a_10000 {
+  explore_source: order_items {
+    column: nb_commandes { field: order_items.nb_commandes }
+    filters: [order_items.created_year: "2025"]
+  }
+  assert: plus_de_10000_commandes {
+    expression: ${order_items.nb_commandes} > 10000 ;;
+  }
+}
