@@ -11,8 +11,16 @@ view: +order_items {
   dimension: status {
     description: "Statut de la ligne : Complete, Shipped, Processing, Cancelled, Returned."
   }
-    measure: taux_marge {
+  measure: taux_marge {
     description: "Marge brute / CA net, en pourcentage. Synonymes : marge, taux de marge, rentabilité."
+  }
+  measure: marge_brute {
+    label: "Marge brute"
+    description: "CA net moins coût de revient des produits vendus"
+    type: sum
+    sql: ${marge_ligne} ;;
+    filters: [status: "-Cancelled,-Returned"]
+    value_format_name: eur
   }
 }
 
@@ -38,7 +46,7 @@ explore: ventes_ia {
   description: "Explore réservé au compagnon IA : CA, commandes et panier par catégorie, marque, pays et date."
 
   join: products {
-    sql_on: ${order_items.product_id} = $ {products.id} ;;
+    sql_on: ${order_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
   join: users {
