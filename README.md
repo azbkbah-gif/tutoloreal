@@ -23,6 +23,7 @@ flowchart LR
     B --> D[(BigQuery<br/>thelook_fictif)]
     D --> B --> S --> A --> R[Réponse chiffrée]
 ```
+![alt text](image.png)
 
 Les garde-fous sont empilés à chaque niveau :
 
