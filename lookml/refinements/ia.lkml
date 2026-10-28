@@ -49,7 +49,8 @@ explore: ventes_ia {
   description: "Explore réservé au compagnon IA : CA, commandes et panier par catégorie, marque, pays et date."
 
   join: products {
-    sql_on: ${order_items.product_id} = {products.id} ;;
+    # sql_on: ${order_items.product_id} = ${products.id} ;;
+    sql_on: ${order_items.product_id} =  ;;
     relationship: many_to_one
   }
   join: users {
