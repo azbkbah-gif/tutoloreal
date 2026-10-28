@@ -37,6 +37,9 @@ view: +users {
   dimension: country {
     description: "Pays de résidence du client. Synonymes : pays, marché, zone, géographie."
   }
+    dimension: age_tier {
+    description: "Tranche d'âge du client. Valeurs possibles : Below 18, 18 to 24, 25 to 34, 35 to 44, 45 to 54, 55 to 64, 65 or Above. Synonymes : âge, génération, 25-34 ans."
+  }
 }
 
 explore: ventes_ia {
