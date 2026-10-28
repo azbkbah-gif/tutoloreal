@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Valider le LookML
+        run: python scripts/valider_lookml.py
+
+      - name: Lancer les tests (hors BigQuery)
+        run: pytest -m "not bigquery" -v
+
+
+# name: CI
+
+# on:
+#   pull_request:
+#   push:
+#     branches: [main]
+
+# jobs:
+#   tests:
+#   run-on: ubuntu-latest
+#   steps:
+#     - name: Récuperer le code
+#       uses: actions/checkout@v4
+
+#     - name: installer Python 3.12
+#       uses: actions/setup-python@v5
+#       with:
+#         python-version: "3.12"
+#         cache: pip
+#     - name: Installer les dependances
+#       run: pip install -r requirements.txt
+
+#     - name: Valider le lookml
+#       run: Python scripts/valider_lookml.py
+
+#     - name: Lancer les tests (hors bigquery)
+#       run: pytest -m "not bigquery" -v
