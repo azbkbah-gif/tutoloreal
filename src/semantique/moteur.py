@@ -322,8 +322,12 @@ class ModeleSemantique:
         if bas in relatifs:
             debut, fin = relatifs[bas]
         elif m := re.fullmatch(r"(?:last )?(\d+) (day|week|month|year)s?", bas):
-            n, u = m.groups()
-            debut = f"DATE_SUB({aujourdhui}, INTERVAL {int(n)} {u.upper()})"
+            # "6 months" = le mois en cours + les 5 précédents (périodes complètes, alignées
+            # sur le début du mois) ; "30 days" = aujourd'hui + les 29 jours précédents
+            n, u = int(m.group(1)), m.group(2).upper()
+            unite = "WEEK(MONDAY)" if u == "WEEK" else u
+            debut = (f"DATE_SUB({aujourdhui}, INTERVAL {n - 1} DAY)" if u == "DAY"
+                     else f"DATE_SUB(DATE_TRUNC({aujourdhui}, {unite}), INTERVAL {n - 1} {u})")
             fin = f"DATE_ADD({aujourdhui}, INTERVAL 1 DAY)"
         elif re.fullmatch(r"\d{4}", e):
             p = self._param(params, f"{e}-01-01", "DATE")
